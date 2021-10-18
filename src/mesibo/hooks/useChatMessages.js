@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import {
   isMesiboInitializedSelector,
   latestTimeStampSelector,
-} from "./state/selectors";
+} from "../state/selectors";
 
 type Props = {
   userId?: string,

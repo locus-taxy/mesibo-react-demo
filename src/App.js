@@ -4,20 +4,27 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { store } from "./store";
 import { Provider, useSelector } from "react-redux";
 import ChatIcon from "@mui/icons-material/Chat";
-import { isMesiboinitializedSelector } from "./mesibo/state/selectors";
+import {
+  isMesiboInitializedSelector,
+  selectedConversationSelector,
+} from "./mesibo/state/selectors";
+import Conversations from "./components/Conversations";
+import ChatWindow from "./components/ChatWindow";
 
 function App() {
   useEffect(() => {
     initializeMesibo();
   }, []);
 
-  const isMesiboInitialized = useSelector(isMesiboinitializedSelector);
+  const isMesiboInitialized = useSelector(isMesiboInitializedSelector);
+  const selectedConversation = useSelector(selectedConversationSelector);
 
   return (
     <div className="App">
       <LoadingButton loading={!isMesiboInitialized}>
         <ChatIcon />
       </LoadingButton>
+      {selectedConversation ? <ChatWindow /> : <Conversations />}
     </div>
   );
 }
