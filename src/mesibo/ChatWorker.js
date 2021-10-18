@@ -21,12 +21,10 @@ class MesiboListener {
 }
 const afterScriptLoads = async () => {
   api = new window.Mesibo();
-  api.setCredentials(
-    "134315310f4da1a8fdf6a938b7e309d12ad005aca3d0b46e7e333bca1b"
-  );
+  api.setCredentials(process.env.REACT_APP_MESIBO_CREDENTIALS);
   api.setListener(new MesiboListener());
-  api.setDatabase("mesibo");
-  api.setAppName("test");
+  api.setDatabase(process.env.REACT_APP_MESIBO_DATABASE);
+  api.setAppName(process.env.REACT_APP_MESIBO_APP);
   api.start();
   window.api = api;
 };
