@@ -8,6 +8,12 @@ import { useState } from "react";
 import { getProfile } from "../mesibo/ChatWorker";
 import { useDispatch } from "react-redux";
 import { updateTimeStamp } from "../mesibo/state/slice";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+
+const MESSAGE_STATUS = {
+  SENT: "sent",
+  READ: "read",
+};
 
 function ChatWindow() {
   const userId = useSelector(selectedConversationSelector);
@@ -68,6 +74,15 @@ function ChatMessage({ message, status }) {
   const isMessageIncoming =
     status === MESIBO_MSGSTATUS_RECEIVEDNEW ||
     status === MESIBO_MSGSTATUS_RECEIVEDREAD;
+
+  const getSentMessageStatus = (status) => {
+    if (status === MESIBO_MSGSTATUS_READ) {
+      return MESSAGE_STATUS.READ;
+    }
+
+    return MESSAGE_STATUS.SENT;
+  };
+
   return (
     <ListItem
       style={{
@@ -78,6 +93,17 @@ function ChatMessage({ message, status }) {
       }}
     >
       <div>{message}</div>
+      {!isMessageIncoming && (
+        <DoneAllIcon
+          style={{ marginLeft: "1rem" }}
+          size="small"
+          color={
+            getSentMessageStatus(status) === MESSAGE_STATUS.READ
+              ? "primary"
+              : "initial"
+          }
+        />
+      )}
     </ListItem>
   );
 }
