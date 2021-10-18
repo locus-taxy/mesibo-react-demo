@@ -1,5 +1,25 @@
+import React, { useEffect } from "react";
+import { initializeMesibo } from "./mesibo/ChatWorker";
+import LoadingButton from "@mui/lab/LoadingButton";
+import { MesiboProvider } from "./mesibo/state";
+
 function App() {
-  return <div className="App"></div>;
+  useEffect(() => {
+    initializeMesibo();
+  }, []);
+  return (
+    <div className="App">
+      <LoadingButton />
+    </div>
+  );
 }
 
-export default App;
+function AppWrapper() {
+  return (
+    <MesiboProvider>
+      <App />
+    </MesiboProvider>
+  );
+}
+
+export default AppWrapper;
