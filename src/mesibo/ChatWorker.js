@@ -1,6 +1,9 @@
 /* eslint-disable no-undef */
 import { store } from "../store";
-import { initializeMesibo as initializeMesiboInRedux } from "./slice";
+import {
+  initializeMesibo as initializeMesiboInRedux,
+  updateTimeStamp,
+} from "./state/slice";
 
 let api;
 let isMesiboinitialized = false;
@@ -13,9 +16,11 @@ class MesiboListener {
     console.log("Connection status", status, value);
   }
   Mesibo_OnMessageStatus(msg) {
+    store.dispatch(updateTimeStamp());
     console.log("Message status", msg);
   }
   Mesibo_OnMessage(msg, data) {
+    store.dispatch(updateTimeStamp());
     console.log("Msg received", msg, data);
   }
 }

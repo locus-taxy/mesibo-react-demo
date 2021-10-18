@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isMesiboInitialized: false,
+  latestTimeStamp: new Date().getTime(),
 };
 
 export const mesiboSlice = createSlice({
@@ -11,9 +12,12 @@ export const mesiboSlice = createSlice({
     initializeMesibo: (state) => {
       state.isMesiboInitialized = true;
     },
+    updateTimeStamp: (state) => {
+      state.latestTimeStamp = new Date().getTime();
+    },
   },
 });
 
-export const { initializeMesibo } = mesiboSlice.actions;
+export const { initializeMesibo, updateTimeStamp } = mesiboSlice.actions;
 
 export default mesiboSlice.reducer;
