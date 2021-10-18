@@ -1,10 +1,13 @@
-
+/* eslint-disable no-undef */
+import { store } from "../store";
+import { initializeMesibo as initializeMesiboInRedux } from "./slice";
 
 let api;
 let isMesiboinitialized = false;
 class MesiboListener {
   Mesibo_OnConnectionStatus(status, value) {
-    if (status === window.MESIBO_STATUS_ONLINE) {
+    if (status === MESIBO_STATUS_ONLINE) {
+      store.dispatch(initializeMesiboInRedux());
       console.log("mesibo online", status);
     }
     console.log("Connection status", status, value);
